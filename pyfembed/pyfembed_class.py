@@ -1,5 +1,5 @@
 import requests
-from interfaces import PyfembedInterface, PyfembedUploadInterface
+from .interfaces import PyfembedInterface, PyfembedUploadInterface
 import tus
 import traceback
 import os

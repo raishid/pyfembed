@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [metadata]
 name = "pyfembed"
-version = "0.1.0"
+version = "0.1.5"
 author = "raishid"
 author_email = "raishidavid@gmail.com"
 description = "Upload video with the Fembed API"

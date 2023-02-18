@@ -11,15 +11,14 @@ Python >=3.6
 
     import pyfembed import Pyfembed
 
-    pfb = Pyfembed(client_id=xxxx, client_secret=xxxx)
-
-    upload_url = pfb.get_upload_url()
-    uploaded = pfb.upload(
-        file_path=PATH_VIDEO, 
-        upload_url.data.url, 
-        upload.data.token
+    pyfembed = Pyfembed(client_id, client_secret)
+    upload_url = pyfembed.get_upload_url()
+    uploaded = pyfembed.upload(
+        file_path=filepath, 
+        url_upload=upload_url.data.url, 
+        token=upload_url.data.token
     )
-    video_id = pfb.get_video_id(uploaded['fingerprint'])
+    video_id = pyfembed.get_video_id(uploaded['fingerprint'])
 
 And ready, the file is uploaded to share
 
