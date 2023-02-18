@@ -3,6 +3,7 @@ from interfaces import PyfembedInterface, PyfembedUploadInterface
 import tus
 import traceback
 import os
+from time import sleep
 
 class Pyfembed(PyfembedInterface):
 
@@ -34,7 +35,7 @@ class Pyfembed(PyfembedInterface):
         else:
             raise Exception(r['message'])
 
-    def upload(self, file_path: str, url_upload: str, token: str):
+    def upload(self, file_path: str, url_upload: str, token: str) -> dict:
         if not os.path.isfile(file_path):
             raise Exception('File not found')
 
@@ -42,21 +43,38 @@ class Pyfembed(PyfembedInterface):
 
         with open(file_path, 'rb') as f:
             try:
-                uploaded = tus.upload(
-                    file_obj=f,
+                file_size = tus._get_file_size(f)
+                file_endpoint = tus.create(
                     tus_endpoint=url_upload,
+                    file_name=filename,
+                    file_size=file_size,
                     metadata={
                         'name': filename,
                         'token': token
                     }
                 )
-                print(uploaded)
+                tus.resume(file_obj=f, file_endpoint=file_endpoint, chunk_size=1024 * 1024 * 10, offset=0)
+                return {
+                    'success': True,
+                    'fingerprint': file_endpoint.split('/')[-1] 
+                }
             except tus.TusError as e:
                 response = e.response.content.decode('utf-8', errors='replace')
                 traceback.print_exc()
                 print("Error response: ", response)
 
+    def get_video_id(self, fingerprint: str, first_time: bool = True, sleep_time: int = 30):
+        if first_time:
+            print('Waiting for fingerprint to be processed...')
+            sleep(sleep_time)
 
-pb = Pyfembed('257762', '64548cff975be565')
-url_upload = pb.get_upload_url()
-pb.upload(file_path='D:\\Descargas\\document_5109486648022795075.mp4', url_upload=url_upload.data.url, token=url_upload.data.token)
+        r = self._request('post', '/fingerprint', data = {
+            'client_id': self.client_id,
+            'client_secret': self.client_secret,
+            'file_fingerprint': fingerprint
+        })
+
+        if r['success']:
+            return r['data']['video_id']
+
+        raise Exception(r['message'])

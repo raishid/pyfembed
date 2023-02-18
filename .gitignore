@@ -1,0 +1,7 @@
+*.mp4
+*.mkv
+*.mov
+*.mpg
+build/
+dist/
+*.egg-info/

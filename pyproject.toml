@@ -2,12 +2,11 @@
 requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
-[project]
+[metadata]
 name = "pyfembed"
 version = "0.1.0"
-authors = [
-  { name="raishid", email="raishidavid@gmail.com" },
-]
+author = "raishid"
+author_email = "raishidavid@gmail.com"
 description = "Upload video with the Fembed API"
 readme = "README.md"
 requires-python = ">=3.6"
@@ -16,3 +15,6 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
+
+[dynamic]
+dependencies = ["requests", "tus.py"]
