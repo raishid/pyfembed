@@ -75,6 +75,6 @@ class Pyfembed(PyfembedInterface):
         })
 
         if r['success']:
-            return r['data']['video_id']
+            return r['data']
 
         raise Exception(r['message'])

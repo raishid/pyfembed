@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name='pyfembed',
-    version='0.1.5',
+    version='0.1.6',
     description='Upload video with the Fembed API',
     long_description=long_description,
     long_description_content_type="text/markdown",
