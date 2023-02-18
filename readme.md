@@ -9,6 +9,8 @@ Python >=3.6
 
 # Usage
 
+    pip install pyfembed
+
     import pyfembed import Pyfembed
 
     pyfembed = Pyfembed(client_id, client_secret)
