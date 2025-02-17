@@ -1,5 +1,7 @@
 # Pyfembed
 
+# This library has been marked as deprecated since fembed.com is no longer online.
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 Script to upload Videos to Fembed via API
